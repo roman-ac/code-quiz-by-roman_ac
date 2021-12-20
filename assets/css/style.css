@@ -1,0 +1,82 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  html {
+    font-size: 14px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+    background-color: #eff5f8;
+  }
+  
+  .container {
+    display: block;
+    margin: 80px auto;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,1);
+    transition: 0.3s;
+    width: 800px;
+    background-color: #f3f2ef;
+    padding-top: 20px;
+  }
+
+  .wrapper {
+    padding-top: 20px;
+  }
+  h1 {
+    font-size: 35px;
+    text-decoration: underline;
+  }
+  
+  .startquiz {
+    border-radius: 4px;
+    border-style: none;
+    color: rgb(22, 6, 6);
+    cursor: pointer;
+    font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,1);
+    font-size: 20px;
+    padding: 20px;
+    margin-bottom: 60px;
+    background-color: bisque;
+    font-weight: 500;
+  }
+
+  #description {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .time {
+    font-size: 20px;
+    border-radius: 4px;
+    border-style: none;
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,1);
+    height: 50px;
+    width: 125px;
+    text-align:center;
+    padding-top: 15px;
+    float: right;
+
+
+  }
+
+  .scores {
+    font-size: 20px;
+    text-decoration: underline;
+    border-radius: 4px;
+    border-style: none;
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,1);
+    width: 200px;
+    height: 50px;
+    text-align:center;
+    padding-top: 15px;
+
+  }
+  
