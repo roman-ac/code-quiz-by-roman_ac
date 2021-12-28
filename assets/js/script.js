@@ -10,6 +10,7 @@ var answersEl = document.querySelector(".answer");
 
 
 
+
 var Questionaire = [
     {
         question : "Who's the founder of JavaScript?",
@@ -17,7 +18,7 @@ var Questionaire = [
         answer2 : "Brendan_Smith",
         answer3 : "David_Swarbrick",
         answer4 : "Brendan_Eich",
-        correct : 4
+        correct : "Brendan_Eich"
     },
     {
         question : "What does NaN stands for?",
@@ -47,9 +48,9 @@ function startQuiz () {
 
 startquizEl.addEventListener ("click", function () {
     
-ShowQuestion();
+ShowQuestion ();
 
-var timerInterval = setInterval(function() {
+var timerInterval = setInterval (function () {
     timeLeft--;
     timeEl.textContent = timeLeft;
 
@@ -61,40 +62,54 @@ var timerInterval = setInterval(function() {
 })
 }
 
+    var currentquestion = 0;
+    var lastquestion = [Questionaire.length] - 1;
+    var score = 0;
+    var timer;
 
 
+function ShowQuestion () {
 
-function ShowQuestion() {
-
-    questionEl.textContent = Questionaire[0].question;
-    answerA.textContent = Questionaire[0].answer1;
-    answerB.textContent = Questionaire[0].answer2;
-    answerC.textContent = Questionaire[0].answer3;
-    answerD.textContent = Questionaire[0].answer4;    
+    questionEl.textContent = Questionaire[currentquestion].question;
+    answerA.textContent = Questionaire[currentquestion].answer1;
+    answerB.textContent = Questionaire[currentquestion].answer2;
+    answerC.textContent = Questionaire[currentquestion].answer3;
+    answerD.textContent = Questionaire[currentquestion].answer4;    
 
 
     descriptionEl.setAttribute("style", "display:none;");
     startquizEl.setAttribute("style", "display:none;");
     allanswersEl.setAttribute("style", "display:inline-block");
     
+
     }
 
-    var score = 0;
-
- CheckAnswer();
     
- function CheckAnswer (answer) {
 
-    answersEl.addEventListener ("click", function () {
+    
+ function CheckAnswer (){
+
+    answersEl.addEventListener ("click", function (answer) {
 
 
-        if (answer == Questionaire[0].correct) {
+        if (answer == Questionaire[currentquestion].correct) {
             score++;
         } else {
             timeLeft -= 10;
-        }}
+        }
+        currentquestion++;
+
+        if (currentquestion < lastquestion) {
+            ShowQuestion();
+        } else {
+            clearInterval (timer);
+        }
+    }
+    )}
         
-    )} 
+    
+
+
 
 
 
