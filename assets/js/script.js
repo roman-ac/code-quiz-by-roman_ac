@@ -18,7 +18,7 @@ var Questionaire = [
         answer2 : "Brendan_Smith",
         answer3 : "David_Swarbrick",
         answer4 : "Brendan_Eich",
-        correct : "Brendan_Eich"
+        correct : "Brendan_Eich",
     },
     {
         question : "What does NaN stands for?",
@@ -70,42 +70,45 @@ var timerInterval = setInterval (function () {
 
 function ShowQuestion () {
 
-    questionEl.textContent = Questionaire[currentquestion].question;
-    answerA.textContent = Questionaire[currentquestion].answer1;
-    answerB.textContent = Questionaire[currentquestion].answer2;
-    answerC.textContent = Questionaire[currentquestion].answer3;
-    answerD.textContent = Questionaire[currentquestion].answer4;    
+    questionEl.innerHTML = Questionaire[currentquestion].question;
+    answerA.innerHTML = Questionaire[currentquestion].answer1;
+    answerB.innerHTML = Questionaire[currentquestion].answer2;
+    answerC.innerHTML = Questionaire[currentquestion].answer3;
+    answerD.innerHTML = Questionaire[currentquestion].answer4;    
 
 
     descriptionEl.setAttribute("style", "display:none;");
     startquizEl.setAttribute("style", "display:none;");
     allanswersEl.setAttribute("style", "display:inline-block");
     
-
+    CheckAnswer ();
     }
 
     
-
+var answer;
     
- function CheckAnswer (){
+ function CheckAnswer () {
 
-    answersEl.addEventListener ("click", function (answer) {
+    answersEl.addEventListener ('click', function(){
 
+        answer = answersEl.value;
+        console.log (answersEl);
 
-        if (answer == Questionaire[currentquestion].correct) {
-            score++;
+       if (answer == Questionaire[currentquestion].correct) {
+           score++;
         } else {
             timeLeft -= 10;
-        }
+        } 
         currentquestion++;
 
-        if (currentquestion < lastquestion) {
+      if (currentquestion < lastquestion) {
             ShowQuestion();
-        } else {
+       } else {
             clearInterval (timer);
+       }
+        })
         }
-    }
-    )}
+    
         
     
 
