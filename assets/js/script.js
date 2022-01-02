@@ -7,6 +7,9 @@ var descriptionEl = document.querySelector(".description");
 var startquizEl = document.querySelector(".startquiz");
 var allanswersEl = document.querySelector(".allanswers");
 var answersEl = document.querySelector(".answer");
+var restartEl = document.querySelector(".restart");
+var scorebtnEl = document.querySelector(".scorebtn");
+
 
 
 
@@ -49,10 +52,11 @@ var answerD = document.querySelector("#D");
 
 var currentquestion = 0;
 var lastquestion = Questionaire.length;
-console.log (lastquestion);
 var score = 0;
 var timer;
 
+scorebtnEl.setAttribute("style", "display:none;");
+restartEl.setAttribute("style", "display:none;");
 
 function ShowQuestion () {
 
@@ -65,11 +69,12 @@ function ShowQuestion () {
 
     descriptionEl.setAttribute("style", "display:none;");
     startquizEl.setAttribute("style", "display:none;");
+    scorebtnEl.setAttribute("style", "display:none;");
+    restartEl.setAttribute("style", "display:none;");
     allanswersEl.setAttribute("style", "display:inline-block");
 
-    CheckAnswer();
     
-    }
+    };
 
 
 startquizEl.addEventListener ("click", startQuiz);
@@ -77,8 +82,12 @@ startquizEl.addEventListener ("click", startQuiz);
 var timeLeft = 30;
 
 function startQuiz () {
+
+    currentquestion = 0;
+    score = 0;
     
 ShowQuestion ();
+CheckAnswer();
 
 var timerInterval = setInterval (function () {
     timeLeft--;
@@ -89,13 +98,14 @@ var timerInterval = setInterval (function () {
       
 }
 }, 1000);
-}
+};
 
  
 
 var answer;
     
- function CheckAnswer () {
+ function CheckAnswer (answer) {
+
 
     allanswersEl.addEventListener ('click', function(event){
 
@@ -116,16 +126,35 @@ var answer;
         
         ShowQuestion();
       } else {
-        clearInterval(timer);
+        timeEl.textContent = '';
+        clearInterval();
+        showScore();
 
     }
 
         })
-        }
+        };
 
-function scoreRender () {
 
-}     
+function showScore () {
+
+    var player = prompt ("please enter your name.");
+
+    scorebtnEl.setAttribute("style", "display:inline-block;");
+    restartEl.setAttribute("style", "display:inline-block;");
+    allanswersEl.setAttribute("style", "display:none;");
+
+
+    questionEl.innerHTML = ("Your Score");
+    restartEl.innerHTML = ("Restart");
+    scorebtnEl.innerHTML = score + (" out of 3");
+
+    restartEl.addEventListener ("click", function() {
+        startQuiz();
+    })    
+    
+
+};     
     
     
 
