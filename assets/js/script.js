@@ -27,7 +27,16 @@ var Questionaire = [
         answer3 :"Not a Noun",
         answer4 :"Name after Name",
         correct : "Not a Number",
+    },
+    {
+        question : "What doe 123 stands for?",
+        answer1 : "123",
+        answer2 : "456",
+        answer3 :"768",
+        answer4 :"Name",
+        correct : "123",   
     }
+    
 ]
 
 var questionEl = document.querySelector (".question");
@@ -38,34 +47,11 @@ var answerD = document.querySelector("#D");
 
 
 
-
-
-var timeLeft = 30;
-
-startQuiz();
-
-function startQuiz () {
-
-startquizEl.addEventListener ("click", function () {
-    
-ShowQuestion ();
-
-var timerInterval = setInterval (function () {
-    timeLeft--;
-    timeEl.textContent = timeLeft;
-
-    if(timeLeft === 0) {
-      clearInterval(timerInterval);
-      
-}
-}, 1000);
-})
-}
-
-    var currentquestion = 0;
-    var lastquestion = [Questionaire.length] - 1;
-    var score = 0;
-    var timer;
+var currentquestion = 0;
+var lastquestion = Questionaire.length;
+console.log (lastquestion);
+var score = 0;
+var timer;
 
 
 function ShowQuestion () {
@@ -80,36 +66,67 @@ function ShowQuestion () {
     descriptionEl.setAttribute("style", "display:none;");
     startquizEl.setAttribute("style", "display:none;");
     allanswersEl.setAttribute("style", "display:inline-block");
+
+    CheckAnswer();
     
-    CheckAnswer ();
     }
 
+
+startquizEl.addEventListener ("click", startQuiz);
+
+var timeLeft = 30;
+
+function startQuiz () {
     
+ShowQuestion ();
+
+var timerInterval = setInterval (function () {
+    timeLeft--;
+    timeEl.textContent = timeLeft;
+
+    if(timeLeft === 0) {
+      clearInterval(timerInterval);
+      
+}
+}, 1000);
+}
+
+ 
+
 var answer;
     
  function CheckAnswer () {
 
-    answersEl.addEventListener ('click', function(){
+    allanswersEl.addEventListener ('click', function(event){
 
-        answer = answersEl.value;
-        console.log (answersEl);
+        answer = event.target.textContent;
+        console.log (answer);
 
        if (answer == Questionaire[currentquestion].correct) {
            score++;
-        } else {
+
+       } else {
             timeLeft -= 10;
-        } 
-        currentquestion++;
+    } 
+
+    currentquestion++;
+    
 
       if (currentquestion < lastquestion) {
-            ShowQuestion();
-       } else {
-            clearInterval (timer);
-       }
+        
+        ShowQuestion();
+      } else {
+        clearInterval(timer);
+
+    }
+
         })
         }
+
+function scoreRender () {
+
+}     
     
-        
     
 
 
