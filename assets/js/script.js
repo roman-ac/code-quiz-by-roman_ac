@@ -1,7 +1,7 @@
 
 
 var timeEl = document.querySelector ("#count");
-var scoresEl = document.querySelector ("#highScores");
+var scoresEl = document.querySelector (".scores");
 var startquizEl = document.querySelector (".startquiz");
 var descriptionEl = document.querySelector(".description");
 var startquizEl = document.querySelector(".startquiz");
@@ -32,12 +32,12 @@ var Questionaire = [
         correct : "Not a Number",
     },
     {
-        question : "What doe 123 stands for?",
-        answer1 : "123",
-        answer2 : "456",
-        answer3 :"768",
-        answer4 :"Name",
-        correct : "123",   
+        question : "which of the following data type is not supported by JS?",
+        answer1 : "Random",
+        answer2 : "Number",
+        answer3 :"Boolean",
+        answer4 :"String",
+        correct : "Random",   
     }
     
 ]
@@ -51,7 +51,7 @@ var answerD = document.querySelector("#D");
 
 
 var currentquestion = 0;
-var lastquestion = Questionaire.length;
+var lastquestion = Questionaire.length -1;
 var score = 0;
 var timer;
 
@@ -77,7 +77,7 @@ function ShowQuestion () {
     };
 
 
-startquizEl.addEventListener ("click", startQuiz);
+startquizEl.addEventListener ('click', startQuiz);
 
 var timeLeft = 30;
 
@@ -95,7 +95,7 @@ var timerInterval = setInterval (function () {
 
     if(timeLeft === 0) {
       clearInterval(timerInterval);
-      
+    
 }
 }, 1000);
 };
@@ -111,19 +111,20 @@ var answer;
 
         answer = event.target.textContent;
         console.log (answer);
+        console.log(Questionaire[currentquestion].correct);
 
        if (answer == Questionaire[currentquestion].correct) {
            score++;
+           console.log("score " + score);
 
        } else {
             timeLeft -= 10;
     } 
-
-    currentquestion++;
     
 
       if (currentquestion < lastquestion) {
-        
+
+        currentquestion += 1;
         ShowQuestion();
       } else {
         timeEl.textContent = '';
@@ -139,22 +140,45 @@ var answer;
 function showScore () {
 
     var player = prompt ("please enter your name.");
+    var scoreBoard = player + (" : ") + score;
+    console.log(scoreBoard);
 
     scorebtnEl.setAttribute("style", "display:inline-block;");
     restartEl.setAttribute("style", "display:inline-block;");
     allanswersEl.setAttribute("style", "display:none;");
 
 
-    questionEl.innerHTML = ("Your Score");
+    questionEl.innerHTML = player + (", your score is");
     restartEl.innerHTML = ("Restart");
     scorebtnEl.innerHTML = score + (" out of 3");
 
-    restartEl.addEventListener ("click", function() {
+    localStorage.setItem("score", scoreBoard);
+
+    restartEl.addEventListener ('click', function() {
         startQuiz();
     })    
     
 
-};     
+};    
+
+
+scoresEl.addEventListener ('click',function() {
+
+displayScore();
+})
+
+function displayScore() {
+
+    var list = document.createElement("li");
+    list.textContent = localStorage.getItem("score");
+    
+    
+    var board = document.getElementById("highScores");
+
+    board.appendChild(list);
+    console.log(list);
+
+}
     
     
 
