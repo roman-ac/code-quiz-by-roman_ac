@@ -80,16 +80,18 @@ function ShowQuestion () {
 startquizEl.addEventListener ('click', startQuiz);
 
 var timeLeft = 30;
+var timerInterval;
 
 function startQuiz () {
 
     currentquestion = 0;
     score = 0;
+    timeLeft = 30;
     
 ShowQuestion ();
 CheckAnswer();
 
-var timerInterval = setInterval (function () {
+timerInterval = setInterval (function () {
     timeLeft--;
     timeEl.textContent = timeLeft;
 
@@ -128,7 +130,7 @@ var answer;
         ShowQuestion();
       } else {
         timeEl.textContent = '';
-        clearInterval();
+        clearInterval(timerInterval);
         showScore();
 
     }
